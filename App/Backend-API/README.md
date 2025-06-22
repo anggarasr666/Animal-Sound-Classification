@@ -12,6 +12,10 @@ python -m venv animal_sound_env
 ```bash
 animal_sound_env\Scripts\activate
 ```
+- Mac:
+```bash
+source animal_sound_env/bin/activate
+```
 
 4. Install dependencies:
 ```bash
