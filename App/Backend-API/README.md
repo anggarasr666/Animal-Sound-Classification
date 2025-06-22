@@ -24,7 +24,7 @@ pip install -r Requirements.txt
 
 ## Menjalankan Aplikasi
 ```bash
-pyton main.py
+python main.py
 ```
 
 ## Menggunakan API
