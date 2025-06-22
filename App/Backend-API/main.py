@@ -142,7 +142,7 @@ def load_yamnet_model():
     try:
         # Load YAMNet from TensorFlow Hub
         import tensorflow_hub as hub
-        yamnet_model = hub.load('https://www.kaggle.com/models/google/yamnet/TensorFlow2/yamnet/1')
+        yamnet_model = hub.load('https://tfhub.dev/google/yamnet/1')
         logger.info("YAMNet model loaded successfully from TensorFlow Hub")
         return True
     except Exception as e:
@@ -234,7 +234,7 @@ def extract_manual_features(audio_array: np.ndarray, sr: int = 16000) -> np.ndar
 def load_classifier_model():
     """Load the animal classification model"""
     global classifier_model
-    model_path = 'yamnet_animal_classification_model.h5'
+    model_path = 'yamnet_final_model.h5'
     
     # Check if model file exists
     if not os.path.exists(model_path):
