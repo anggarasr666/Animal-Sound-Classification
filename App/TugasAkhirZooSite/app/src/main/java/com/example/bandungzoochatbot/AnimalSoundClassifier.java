@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.bandungzoochatbot.assets.LoadingDialog;
 import com.masoudss.lib.WaveformSeekBar;
 
 import org.json.JSONException;
@@ -67,7 +68,7 @@ import java.security.cert.X509Certificate;
 public class AnimalSoundClassifier extends AppCompatActivity {
     private static final int PICK_AUDIO_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
-    private static final String API_URL = "http://10.0.2.2:8000/classify";
+    private static final String API_URL = "http://srv877031.hstgr.cloud/classify";
     private static final String TAG = "AnimalSoundClassifier";
     private static final int BUFFER_SIZE_FACTOR = 4; // Meningkatkan buffer size factor
     private static final int SAMPLING_RATE = 44100;
@@ -92,6 +93,7 @@ public class AnimalSoundClassifier extends AppCompatActivity {
     private long recordingStartTime;  // This is for recording duration
     private OkHttpClient httpClient;
     private Call currentCall;
+    final LoadingDialog loadingDialog = new LoadingDialog(AnimalSoundClassifier.this);
 
     private volatile boolean shouldStopWaveformThread = false;
     private Thread waveformThread;
@@ -786,6 +788,8 @@ public class AnimalSoundClassifier extends AppCompatActivity {
                     .post(requestBody)
                     .build();
 
+            loadingDialog.startLoadingDialog();
+
             if (currentCall != null && !currentCall.isCanceled()) {
                 currentCall.cancel();
             }
@@ -1092,6 +1096,9 @@ public class AnimalSoundClassifier extends AppCompatActivity {
         if (timerHandler != null) {
             timerHandler.removeCallbacksAndMessages(null);
         }
+        if (loadingDialog.isShowing()) {
+            loadingDialog.dismissDialog();
+        }
     }
 
     @Override
@@ -1139,6 +1146,9 @@ public class AnimalSoundClassifier extends AppCompatActivity {
         }
         if (playbackThread != null && playbackThread.isAlive()) {
             playbackThread.interrupt();
+        }
+        if (loadingDialog.isShowing()) {
+            loadingDialog.dismissDialog();
         }
 
         super.onDestroy();
