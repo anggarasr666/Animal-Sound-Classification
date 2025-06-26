@@ -68,7 +68,7 @@ import java.security.cert.X509Certificate;
 public class AnimalSoundClassifier extends AppCompatActivity {
     private static final int PICK_AUDIO_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
-    private static final String API_URL = "http://srv877031.hstgr.cloud/classify";
+    private static final String API_URL = "https://srv877031.hstgr.cloud/classify";
     private static final String TAG = "AnimalSoundClassifier";
     private static final int BUFFER_SIZE_FACTOR = 4; // Meningkatkan buffer size factor
     private static final int SAMPLING_RATE = 44100;
